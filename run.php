@@ -42,6 +42,7 @@ $feeds = [];
 foreach ($simplepie->get_items() as $item) {
     $feeds[$item->get_feed()->get_title()] = $item->get_feed();
 }
+ksort($feeds);
 
 /**
  * Create the output HTML and cache it for use by the syntax component.

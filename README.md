@@ -6,8 +6,9 @@ https://github.com/samwilson/sourdust-feed-aggregator
 ## Installation
 
 1. Clone from GitHub: `git clone https://github.com/samwilson/sourdust-feed-aggregator.git feeds`
-2. Rename the files with `_example` in their names (to remove that string), and edit these copies to your satisfaction
-3. Run `php run.php`
+2. Install dependencies: `composer install`
+3. Rename the files with `_example` in their names (to remove that string), and edit these copies to your satisfaction
+4. Run `php run.php`
 
 This will create: `index.html`, `feed.rss`, and `feeds.html`.
 

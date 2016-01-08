@@ -14,7 +14,8 @@ require_once __DIR__ . '/vendor/autoload.php';
  * Get the feed list and set up SimplePie.
  */
 $simplepie = new SimplePie();
-$simplepie->set_feed_url(file(__DIR__ . '/feeds.csv', FILE_IGNORE_NEW_LINES));
+$feedUrls = array_filter(file(__DIR__ . '/feeds.csv', FILE_IGNORE_NEW_LINES));
+$simplepie->set_feed_url($feedUrls);
 $ua = 'Mozilla/4.0 (compatible; Sourdust Feed Aggregator https://github.com/samwilson/sourdust-feed-aggregator)';
 $simplepie->set_useragent($ua);
 
@@ -32,7 +33,7 @@ $simplepie->set_cache_location($cacheDir);
  */
 $simplepie->init();
 if ($simplepie->error()) {
-    echo "Errors:\n    ".join("\n    ", $simplepie->error());
+    echo "Errors:\n    " . join("\n    ", $simplepie->error());
 }
 
 /**
@@ -53,10 +54,14 @@ $twig->enableDebug();
 $twig->addExtension(new \Twig_Extension_Debug());
 // Render all templates.
 foreach (glob(__DIR__ . '/*.twig') as $tpl) {
+    if (strpos('_example', $tpl) !== false) {
+        continue;
+    }
     $template = $twig->loadTemplate(basename($tpl));
     $out = $template->render([
         'simplepie' => $simplepie,
-        'last_build_date' => date('r'),
+        'date_RFC2822' => date('r'),
+        'date_ISO8601' => date('c'),
         'feeds' => $feeds,
     ]);
     $name = pathinfo($tpl, PATHINFO_FILENAME);

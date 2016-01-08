@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="cookie_used_true">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Sourdust Feed Aggregator</title>
+        <link rel="alternate" href="feed.rss" title="RSS" type="application/rss+xml">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/mblode/marx/master/css/marx.min.css">
+    </head>
+    <body>
+        <main>
+            <header>
+                <h1>Sourdust Feed Aggregator</h1>
+            </header>
+
+            <aside>
+                <h2>Feeds</h2>
+                <ol>
+                {% for feed in feeds %}
+                    <li><a href="{{feed.get_link}}">{{feed.get_title}}</a></li>
+                {% endfor %}
+                </ol>
+            </aside>
+
+            {% for item in simplepie.get_items %}
+            <article>
+                <h2><a href="{{item.get_permalink()}}">{{item.get_title|raw}}</a></h2>
+                <p>
+                    <em>
+                        Published {{item.get_date('j M Y')}}
+                        by {{item.get_author.get_name}}
+                        in <a href="{{item.get_feed.get_permalink}}">{{item.get_feed.get_title}}</a>.
+                    </em>
+                </p>
+                {{item.get_content|raw}}
+            </article>
+            {% endfor %}
+
+        </main>
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>Feed</title>
+        <link></link>
+        <description></description>
+        <language></language>
+        <lastBuildDate>{{last_build_date}}</lastBuildDate>
+        <pubDate>{{last_build_date}}</pubDate>
+
+        {% for item in simplepie.get_items %}
+        <item>
+            <title>{{item.get_title|raw}}</title>
+            <link>{{item.get_permalink}}</link>
+            <pubDate>{{item.get_date('r')}}</pubDate>
+            <guid>{{item.get_id}}</guid>
+            <dc:creator>{{item.get_author.get_name|raw}}</dc:creator>
+            <description>{{item.get_content}}</description>
+        </item>
+        {% endfor %}
+
+    </channel>
+</rss>

@@ -9,25 +9,31 @@
     <updated>{{date_ISO8601}}</updated>
 
     {% for item in simplepie.get_items %}
-    <entry>
-        <title>{{item.get_title|raw}}</title>
-        <link href="{{item.get_permalink}}" />
-        <updated>{{item.get_date('c')}}</updated>
-        <id>{{item.get_id}}</id>
-        <author>
-            {% if item.get_author.get_name %}
-            <name>{{item.get_author.get_name|raw}}</name>
-            {% endif %}
-            {% if item.get_author.get_email %}
-            <email>{{item.get_author.get_email|raw}}</email>
-            {% endif %}
-        </author>
-        <content type="xhtml">
-            <div xmlns="http://www.w3.org/1999/xhtml">
-                {{item.get_content|raw}}
-            </div>
-        </content>
-    </entry>
+        <entry>
+            <title type="html">
+                {% if item.get_title %}
+                    {{item.get_title}}
+                {% else %}
+                    Untitled
+                {% endif %}
+            </title>
+            <link href="{{item.get_permalink}}" />
+            <updated>{{item.get_date('c')}}</updated>
+            <id>{{item.get_id}}</id>
+            <author>
+                {% if item.get_author.get_name %}
+                <name>{{item.get_author.get_name|raw}}</name>
+                {% else %}
+                Anon
+                {% endif %}
+                {% if item.get_author.get_email %}
+                <email>{{item.get_author.get_email|raw}}</email>
+                {% endif %}
+            </author>
+            <content type="html">
+                {{item.get_content}}
+            </content>
+        </entry>
     {% endfor %}
 
 </feed>

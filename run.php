@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 /**
@@ -33,7 +34,7 @@ $simplepie->set_cache_location($cacheDir);
  */
 $simplepie->init();
 if ($simplepie->error()) {
-    echo "Errors:\n    " . join("\n    ", $simplepie->error());
+    echo "Errors:\n    " . join("\n    ", $simplepie->error())."\n";
 }
 
 /**

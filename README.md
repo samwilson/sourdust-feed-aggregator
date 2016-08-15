@@ -7,16 +7,23 @@ https://github.com/samwilson/sourdust-feed-aggregator
 
 1. Clone from GitHub: `git clone https://github.com/samwilson/sourdust-feed-aggregator.git feeds`
 2. Install dependencies: `composer install`
-3. Rename the files with `_example` in their names (to remove that string), and edit these copies to your satisfaction
+3. Copy the `.example` files (to remove that string), and edit these copies to your satisfaction
 4. Run `php run.php`
 
-This will create: `index.html`, `feed.rss`, and `feeds.html`.
+This will create: `index.html`, `feed.rss`, and `atom.xml`.
 
 ## Custom templates
 
 Anything with the `.twig` file extension will be rendered and output as the same
-filename without the `.twig`, so to create other templates (e.g. `feeds.opml`)
-you can just create any file (e.g. `feeds.opml.twig`).
+filename without the `.twig`, so to create another template (e.g. `feeds.opml`)
+you can just create a new file (e.g. `feeds.opml.twig`).
+
+## Backing up
+
+Make sure you back up the following files:
+
+* `feeds.csv`
+* `*.twig`
 
 ## Kudos
 * SimplePie: http://simplepie.org/

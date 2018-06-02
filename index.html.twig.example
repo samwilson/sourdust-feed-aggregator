@@ -1,41 +1,61 @@
-<!DOCTYPE html>
-<html lang="en" class="cookie_used_true">
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Sourdust Feed Aggregator</title>
-        <link rel="alternate" href="feed.rss" title="RSS" type="application/rss+xml">
-        <link rel="stylesheet" href="https://cdn.rawgit.com/mblode/marx/master/css/marx.min.css">
+        <link rel="alternate" href="atom.xml" title="Atom feed" type="application/atom+xml">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
-        <main>
-            <header>
-                <h1>Sourdust Feed Aggregator</h1>
-            </header>
+        <header class="text-center mb-5">
+            <h1>Sourdust Feed Aggregator</h1>
+            <hr />
+        </header>
 
-            <aside>
-                <h2>Feeds</h2>
-                <ol>
-                {% for feed in feeds %}
-                    <li><a href="{{feed.get_link}}">{{feed.get_title}}</a></li>
-                {% endfor %}
-                </ol>
-            </aside>
+        <main role="main" class="container">
+            <div class="row">
 
-            {% for item in simplepie.get_items %}
-            <article>
-                <h2><a href="{{item.get_permalink()}}">{{item.get_title|raw}}</a></h2>
-                <p>
-                    <em>
-                        Published {{item.get_date('j M Y')}}
-                        by {{item.get_author.get_name}}
-                        in <a href="{{item.get_feed.get_permalink}}">{{item.get_feed.get_title}}</a>.
-                    </em>
-                </p>
-                {{item.get_content|raw}}
-            </article>
-            {% endfor %}
+                <div class="col-md-8">
+                    {% for item in simplepie.get_items %}
+                        <article class="mb-5">
+                            <div class="jumbotron p-3 text-white bg-secondary">
+                                <h3 class="">
+                                    {{item.get_title|raw}}
+                                </h3>
+                                <div class="row">
+                                    <p class="col-8 text-white">
+                                        Published {{item.get_date('j M Y')}}
+                                        by {{item.get_author.get_name}}
+                                        on <a href="{{item.get_feed.get_permalink}}" class="text-white">{{item.get_feed.get_title}}</a>.
+                                    </p>
+                                    <p class="col-4 text-right">
+                                        <a href="{{item.get_permalink()}}" class="badge badge-pill badge-info">Permalink</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div>{{item.get_content|raw}}</div>
+                        </article>
+                    {% endfor %}
+                </div>
 
+                <aside class="col-md-4">
+                    <h2>Feeds</h2>
+                    <ol>
+                        {% for feed in feeds %}
+                            <li><a href="{{feed.get_link}}">{{feed.get_title}}</a></li>
+                        {% endfor %}
+                    </ol>
+                </aside>
+            </div>
         </main>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>

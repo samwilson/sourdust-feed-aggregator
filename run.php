@@ -13,9 +13,11 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 /**
  * Get the feed list and set up SimplePie.
+ * Checking for .csv is for backwards compatibility to pre-1.0.
  */
 $simplepie = new SimplePie();
-$feedUrls = array_filter(file(__DIR__ . '/feeds.csv', FILE_IGNORE_NEW_LINES));
+$feedsFile = is_readable(__DIR__ . '/feeds.csv') ? __DIR__ . '/feeds.csv' : __DIR__ . '/feeds.txt';
+$feedUrls = array_filter(file($feedsFile, FILE_IGNORE_NEW_LINES));
 $simplepie->set_feed_url($feedUrls);
 $ua = 'Mozilla/4.0 (compatible; Sourdust Feed Aggregator https://github.com/samwilson/sourdust-feed-aggregator)';
 $simplepie->set_useragent($ua);

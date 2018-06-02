@@ -1,8 +1,10 @@
 /cache
 /vendor
 /feeds.csv
+/feeds.txt
 /*.twig
 /*.rss
 /*.xml
 /*.html
 /nbproject/
+/.idea/

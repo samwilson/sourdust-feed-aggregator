@@ -6,11 +6,16 @@ https://github.com/samwilson/sourdust-feed-aggregator
 ## Installation
 
 1. Clone from GitHub: `git clone https://github.com/samwilson/sourdust-feed-aggregator.git feeds`
+2. Go into that directory: `cd feeds`
 2. Install dependencies: `composer install`
-3. Copy the `.example` files (to remove that string), and edit these copies to your satisfaction
-4. Run `php run.php`
+3. Copy the `.example` files to remove that suffix.
+   The minimum required files are:
+   * `cp feeds.txt.example feeds.txt`
+   * `cp index.html.twig.example index.html.twig`
+   * `cp atom.xml.twig.example atom.xml.twig`
+4. Run `./run.php` (or add it to a cronjob)
 
-This will create: `index.html`, `feed.rss`, and `atom.xml`.
+This will create `index.html` and `atom.xml`.
 
 ## Custom templates
 
@@ -22,17 +27,17 @@ you can just create a new file (e.g. `feeds.opml.twig`).
 
 Make sure you back up the following files:
 
-* `feeds.csv`
+* `feeds.txt`
 * `*.twig`
 
 ## Kudos
-* SimplePie: http://simplepie.org/
-* Marx CSS: https://github.com/mblode/marx
-* Twig templating: http://twig.sensiolabs.org/
+* SimplePie: https://simplepie.org/
+* Bootstrap CSS: https://getbootstrap.com/
+* Twig templating: https://twig.sensiolabs.org/
 
-## Licence
+## Licence (GPL3+)
 
-Copyright (C) 2016 Sam Wilson
+Copyright © 2018 Sam Wilson.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

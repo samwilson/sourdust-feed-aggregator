@@ -36,7 +36,8 @@ $simplepie->set_cache_location($cacheDir);
  */
 $simplepie->init();
 if ($simplepie->error()) {
-    echo "Errors:\n    " . join("\n    ", $simplepie->error())."\n";
+    $errors = !is_array($simplepie->error()) ? [$simplepie->error()] : $simplepie->error();
+    echo "Errors:\n    " . join("\n    ", $errors)."\n";
 }
 
 /**

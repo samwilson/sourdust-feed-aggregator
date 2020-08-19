@@ -5,5 +5,14 @@
     "require": {
         "simplepie/simplepie": "^1.5.2",
         "twig/twig": "^1.35"
+    },
+    "require-dev": {
+        "php-parallel-lint/php-parallel-lint": "^1.2"
+    },
+    "scripts": {
+        "test": [
+            "composer validate",
+            "parallel-lint . --exclude node_modules --exclude vendor"
+        ]
     }
 }
